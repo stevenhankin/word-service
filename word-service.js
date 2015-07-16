@@ -6,11 +6,13 @@ fs.readFile('/usr/share/dict/words',{'encoding':'utf-8'}, function(err,data) {
   words = data.split('\n');
   console.log("Loaded "+words.length+" words");
   var wordCount = words.length;
+  var listenPort = 9090;
+  console.log("Listening on "+listenPort+"..");
   http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     var n = Math.random();
     var randWordOffset = Math.round ( n * wordCount ).toString();
     res.end( words[randWordOffset] );
-  }).listen(9090);
+  }).listen(listenPort);
 });
 
